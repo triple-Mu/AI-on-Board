@@ -142,7 +142,7 @@ def main():
             draw_on_image(frame, outputs)
             if args.show:
                 cv2.imshow('result', frame)
-                if cv2.waitKey(1) == 27:
+                if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
             else:
                 cv2.imwrite(str(save_path), frame)
