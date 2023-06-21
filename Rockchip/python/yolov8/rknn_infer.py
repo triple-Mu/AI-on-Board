@@ -34,9 +34,9 @@ COLORS = {
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input', help='Image path, images path or video path.')
-    parser.add_argument('--rknn', type=str, help='Param file')
-    parser.add_argument('--output', help='Output path for saving results.')
+    parser.add_argument('--input', type=str, help='Image path, images path or video path.')
+    parser.add_argument('--rknn', type=str, help='Rknn path file')
+    parser.add_argument('--output', type=str, default='output', help='Output path for saving results.')
     parser.add_argument(
         '--show', action='store_true', help='Show the detection results')
     parser.add_argument(
@@ -108,7 +108,6 @@ def main():
     if not args.show:
         output_path.mkdir(parents=True, exist_ok=True)
 
-    images = []
     if inputs.suffix in IMG_EXTENSIONS:
         image = cv2.imread(str(inputs))
         save_path = output_path / inputs.name
@@ -131,7 +130,7 @@ def main():
                     cv2.waitKey(0)
                 else:
                     cv2.imwrite(str(save_path), image)
-    elif inputs.suffix == 'mp4':
+    elif inputs.suffix == '.mp4':
         cap = cv2.VideoCapture(str(inputs))
         frame_id = 0
         while cap.isOpened():
