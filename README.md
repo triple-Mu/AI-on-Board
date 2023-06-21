@@ -1,2 +1,5 @@
 # AI-on-Board
-Examples of AI model running on the board, such as horizon/rockchip and so on.
+
+## yolov8 on RK3588
+
+See more in [`README.md`](Rockchip/python/yolov8/README.md)
