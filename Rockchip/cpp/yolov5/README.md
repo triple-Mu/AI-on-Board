@@ -11,7 +11,7 @@ conda create -n rknn python=3.8
 conda activate rknn
 ```
 
-Install yolov8:
+Install yolov5:
 
 ```bash
 git clone https://github.com/triple-Mu/yolov5.git -b triplemu/model-only

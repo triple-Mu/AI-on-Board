@@ -37,22 +37,6 @@ __inline__ static float fast_sigmoid(float x)
     return 1.f / (1.f + fast_exp(-x));
 }
 
-__inline__ static float fast_softmax(const float* src, float* dst, int length)
-{
-    const float alpha       = *std::max_element(src, src + length);
-    float       denominator = 0;
-    float       dis_sum     = 0;
-    for (int i = 0; i < length; ++i) {
-        dst[i] = fast_exp(src[i] - alpha);
-        denominator += dst[i];
-    }
-    for (int i = 0; i < length; ++i) {
-        dst[i] /= denominator;
-        dis_sum += (float)i * dst[i];
-    }
-    return dis_sum;
-}
-
 static void qsort_descent_inplace(std::vector<Object>& proposals, int left, int right)
 {
     int   i = left;
@@ -81,13 +65,15 @@ static void qsort_descent_inplace(std::vector<Object>& proposals, int left, int 
     {
 #pragma omp section
         {
-            if (left < j)
+            if (left < j) {
                 qsort_descent_inplace(proposals, left, j);
+            }
         }
 #pragma omp section
         {
-            if (i < right)
+            if (i < right) {
                 qsort_descent_inplace(proposals, i, right);
+            }
         }
     }
 }
